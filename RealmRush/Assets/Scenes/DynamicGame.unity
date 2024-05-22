@@ -16315,7 +16315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyGameObject: {fileID: 5270244272088840814, guid: 9766ef51b26d3924c98c00d638dfc64b, type: 3}
-  poolSize: 0
+  poolSize: 2
   spawnTimer: 1
 --- !u!114 &1371284106
 MonoBehaviour:
