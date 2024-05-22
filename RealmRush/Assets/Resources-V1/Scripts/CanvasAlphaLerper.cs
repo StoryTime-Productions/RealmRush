@@ -16,7 +16,7 @@ public class CanvasAlphaLerper : MonoBehaviour
 
     void Start()
     {
-        Application.targetFrameRate = 50;
+        Application.targetFrameRate = 60;
 
         // Set the alpha of all canvas elements to 0 initially
         foreach (CanvasGroup canvasGroup in canvasGroups)

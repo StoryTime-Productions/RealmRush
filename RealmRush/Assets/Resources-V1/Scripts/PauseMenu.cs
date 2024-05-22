@@ -11,6 +11,8 @@ public class PauseMenu : MonoBehaviour
 
     void Start()
     {
+        Application.targetFrameRate = 60;
+
         pauseMenuUI.SetActive(false);
 
         if (instance != null && instance != this)

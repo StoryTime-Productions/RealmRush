@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro;
 
-public class Bank : MonoBehaviour
+public class Bank_v2 : MonoBehaviour
 {
     [SerializeField] int startingBalance = 150;
     [SerializeField] int enemiesKilled = 0;
