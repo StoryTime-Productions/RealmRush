@@ -5057,8 +5057,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd977df801ebdb049bbd6f4189a65377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 0}
+  weapon: {fileID: 4751948830167956582}
   target: {fileID: 0}
-  projectileParticles: {fileID: 0}
+  projectileParticles: {fileID: 1540968517733240370}
   rotationSpeed: 5
   range: 15

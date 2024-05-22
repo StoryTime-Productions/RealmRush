@@ -81,9 +81,11 @@ public class CoordinateLabeler_v2 : MonoBehaviour
 
     void DisplayCoordinates()
     {
-        coordinates.x = Mathf.RoundToInt(transform.parent.position.x / UnityEditor.EditorSnapSettings.move.x);
+        if (gridManager == null) return;
 
-        coordinates.y = Mathf.RoundToInt(transform.parent.position.z / UnityEditor.EditorSnapSettings.move.z);
+        coordinates.x = Mathf.RoundToInt(transform.parent.position.x / gridManager.UnityGridSize);
+
+        coordinates.y = Mathf.RoundToInt(transform.parent.position.z / gridManager.UnityGridSize);
 
         label.text = $"{coordinates.x} , {coordinates.y}";
     }
