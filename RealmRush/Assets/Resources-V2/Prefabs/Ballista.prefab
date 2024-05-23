@@ -5006,8 +5006,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6912515056233125547}
-  - component: {fileID: 2840392329834204545}
   - component: {fileID: -3850036686880234168}
+  - component: {fileID: -2208089840922759501}
   m_Layer: 0
   m_Name: Ballista
   m_TagString: Untagged
@@ -5032,19 +5032,6 @@ Transform:
   - {fileID: 4751948830167956582}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2840392329834204545
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8601596408924118110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b179cb64fd0f0014dae420ce3deac531, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cost: 25
 --- !u!114 &-3850036686880234168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5058,7 +5045,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 4751948830167956582}
-  target: {fileID: 0}
   projectileParticles: {fileID: 1540968517733240370}
-  rotationSpeed: 5
   range: 15
+--- !u!114 &-2208089840922759501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8601596408924118110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8354fa4172addb4895bdb41942c4fac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 75

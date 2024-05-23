@@ -1,17 +1,18 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Enemy_v2))]
 public class EnemyMover_v2 : MonoBehaviour
 {
-    [SerializeField] List<Waypoint> path = new List<Waypoint>();
-    public float rotationSpeed = 12.0f; // Speed of rotation
     [SerializeField][Range(0f, 5f)] float speed = 1f;
 
-    Enemy enemy;
+    List<Node> path = new List<Node>();
 
-    // Start is called before the first frame update
+    Enemy_v2 enemy;
+    GridManager gridManager;
+    Pathfinder pathfinder;
+
     void OnEnable()
     {
         FindPath();
@@ -19,51 +20,42 @@ public class EnemyMover_v2 : MonoBehaviour
         StartCoroutine(FollowPath());
     }
 
-    void Start()
+    void Awake()
     {
-        enemy = GetComponent<Enemy>();
+        enemy = GetComponent<Enemy_v2>();
+        gridManager = FindObjectOfType<GridManager>();
+        pathfinder = FindObjectOfType<Pathfinder>();
     }
 
     void FindPath()
     {
         path.Clear();
-
-        GameObject parent = GameObject.FindGameObjectWithTag("Path");
-
-        foreach (Transform child in parent.transform)
-        {
-            path.Add(child.GetComponent<Waypoint>());
-        }
+        path = pathfinder.GetNewPath();
     }
 
     void ReturnToStart()
     {
-        transform.position = path[0].transform.position;
+        transform.position = gridManager.GetPositionFromCoordinates(pathfinder.StartCoordinates);
     }
 
     void FinishPath()
     {
         enemy.StealGold();
-
         gameObject.SetActive(false);
     }
 
     IEnumerator FollowPath()
     {
-        foreach (Waypoint waypoint in path)
+        for (int i = 0; i < path.Count; i++)
         {
             Vector3 startPosition = transform.position;
-            Vector3 endPosition = waypoint.transform.position;
+            Vector3 endPosition = gridManager.GetPositionFromCoordinates(path[i].coordinates);
             float travelPercent = 0f;
+
+            transform.LookAt(endPosition);
 
             while (travelPercent < 1f)
             {
-                transform.rotation = Quaternion.Lerp(
-                transform.rotation,
-                Quaternion.LookRotation(endPosition - transform.position),
-                rotationSpeed * Time.deltaTime
-                );
-
                 travelPercent += Time.deltaTime * speed;
                 transform.position = Vector3.Lerp(startPosition, endPosition, travelPercent);
                 yield return new WaitForEndOfFrame();

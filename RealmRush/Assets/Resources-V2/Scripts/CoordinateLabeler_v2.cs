@@ -1,11 +1,10 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.AI;
 
-[RequireComponent(typeof(TMP_Text))]
 [ExecuteAlways]
+[RequireComponent(typeof(TextMeshPro))]
 public class CoordinateLabeler_v2 : MonoBehaviour
 {
     [SerializeField] Color defaultColor = Color.white;
@@ -13,16 +12,14 @@ public class CoordinateLabeler_v2 : MonoBehaviour
     [SerializeField] Color exploredColor = Color.yellow;
     [SerializeField] Color pathColor = new Color(1f, 0.5f, 0f);
 
-    TMP_Text label;
+    TextMeshPro label;
     Vector2Int coordinates = new Vector2Int();
     GridManager gridManager;
 
     void Awake()
     {
-        gridManager = GetComponent<GridManager>();
-
-        label = GetComponent<TMP_Text>();
-
+        gridManager = FindObjectOfType<GridManager>();
+        label = GetComponent<TextMeshPro>();
         label.enabled = false;
 
         DisplayCoordinates();
@@ -33,14 +30,11 @@ public class CoordinateLabeler_v2 : MonoBehaviour
         if (!Application.isPlaying)
         {
             DisplayCoordinates();
-
             UpdateObjectName();
-
             label.enabled = true;
         }
 
-        SetEnableColor();
-
+        SetLabelColor();
         ToggleLabels();
     }
 
@@ -52,27 +46,26 @@ public class CoordinateLabeler_v2 : MonoBehaviour
         }
     }
 
-    void SetEnableColor()
+    void SetLabelColor()
     {
-        if (gridManager == null) return;
+        if (gridManager == null) { return; }
 
         Node node = gridManager.GetNode(coordinates);
+
+        if (node == null) { return; }
 
         if (!node.isWalkable)
         {
             label.color = blockedColor;
         }
-
         else if (node.isPath)
         {
             label.color = pathColor;
         }
-
         else if (node.isExplored)
         {
             label.color = exploredColor;
         }
-
         else
         {
             label.color = defaultColor;
@@ -81,13 +74,10 @@ public class CoordinateLabeler_v2 : MonoBehaviour
 
     void DisplayCoordinates()
     {
-        if (gridManager == null) return;
+        coordinates.x = Mathf.RoundToInt(transform.parent.position.x / UnityEditor.EditorSnapSettings.move.x);
+        coordinates.y = Mathf.RoundToInt(transform.parent.position.z / UnityEditor.EditorSnapSettings.move.z);
 
-        coordinates.x = Mathf.RoundToInt(transform.parent.position.x / gridManager.UnityGridSize);
-
-        coordinates.y = Mathf.RoundToInt(transform.parent.position.z / gridManager.UnityGridSize);
-
-        label.text = $"{coordinates.x} , {coordinates.y}";
+        label.text = coordinates.x + "," + coordinates.y;
     }
 
     void UpdateObjectName()
