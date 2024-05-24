@@ -11,7 +11,7 @@ public class EnemyHealth_v2 : MonoBehaviour
     [SerializeField] int difficultyRamp = 1;
 
     int currentHitPoints = 0;
-    Enemy enemy;
+    Enemy_v2 enemy;
 
 
     void OnEnable()
@@ -21,7 +21,7 @@ public class EnemyHealth_v2 : MonoBehaviour
 
     void Start()
     {
-        enemy = GetComponent<Enemy>();
+        enemy = GetComponent<Enemy_v2>();
     }
 
     void OnParticleCollision(GameObject other)
@@ -36,7 +36,9 @@ public class EnemyHealth_v2 : MonoBehaviour
         if (currentHitPoints <= 0)
         {
             gameObject.SetActive(false);
+
             maxHitPoints += difficultyRamp;
+
             enemy.RewardGold();
         }
     }

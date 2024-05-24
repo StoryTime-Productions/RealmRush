@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 908706534228030386, guid: 778ce8e46f371fe41a5cef10937c3d8f, type: 3}
+      propertyPath: isPlaceable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4926265484168212677, guid: 778ce8e46f371fe41a5cef10937c3d8f, type: 3}
       propertyPath: m_Name
       value: Shore_90

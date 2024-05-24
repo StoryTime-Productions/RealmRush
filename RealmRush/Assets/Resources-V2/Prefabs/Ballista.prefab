@@ -5047,6 +5047,7 @@ MonoBehaviour:
   weapon: {fileID: 4751948830167956582}
   projectileParticles: {fileID: 1540968517733240370}
   range: 15
+  rotationSpeed: 5
 --- !u!114 &-2208089840922759501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5059,4 +5060,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8354fa4172addb4895bdb41942c4fac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 75
+  cost: 35
+  buildDelay: 1

@@ -34,11 +34,14 @@ public class Tile : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (gridManager.GetNode(coordinates).isWalkable && !pathfinder.WillBlockPath(coordinates))
+        if (gridManager.GetNode(coordinates).isWalkable && !pathfinder.WillBlockPath(coordinates) && !PauseMenu.gameIsPaused)
         {
-            bool isPlaced = towerPrefab.CreateTower(towerPrefab, transform.position);
-            isPlaceable = !isPlaced;
-            gridManager.BlockNode(coordinates);
+            if (towerPrefab.CreateTower(towerPrefab, transform.position))
+            {
+                gridManager.BlockNode(coordinates);
+
+                pathfinder.NotifyReceivers();
+            }
         }
     }
 }

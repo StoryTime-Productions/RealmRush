@@ -18,6 +18,7 @@ public class Bank : MonoBehaviour
     [SerializeField] TextMeshProUGUI displayBalance;
     [SerializeField] TextMeshProUGUI displayKillCount;
     [SerializeField] GameObject gameOverPanel;
+    [SerializeField] GameObject statPanel;
 
     void Awake()
     {
@@ -69,6 +70,8 @@ public class Bank : MonoBehaviour
             displayKillCount.enabled = false;
 
             gameOverPanel.SetActive(true);
+
+            statPanel.SetActive(false);
 
             Time.timeScale = 0;
         }

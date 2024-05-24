@@ -1,27 +1,33 @@
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenuUI;
-    bool gameIsPaused = false;
+    [SerializeField] PostProcessVolume postProcessVolume;
+    [SerializeField] TMP_Text toggleText;
 
-    // Static reference to the PauseMenu instance
-    static PauseMenu instance;
+    public static bool gameIsPaused;
+
+    public static bool postProcessingOff;
 
     void Start()
     {
+        gameIsPaused = false;
+
         Application.targetFrameRate = 60;
 
-        pauseMenuUI.SetActive(false);
+        if (pauseMenuUI != null) pauseMenuUI.SetActive(false);
 
-        if (instance != null && instance != this)
+        if (postProcessingOff)
         {
-            Destroy(gameObject);
-            return;
-        }
+            postProcessVolume.enabled = false;
 
-        instance = this;
+            toggleText.text = "Enable Post Processing";
+        }
     }
 
     void Update()
@@ -43,6 +49,11 @@ public class PauseMenu : MonoBehaviour
     public void StartDynamic()
     {
         SceneManager.LoadScene("DynamicGame");
+    }
+
+    public void StartMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void Resume()
@@ -71,5 +82,17 @@ public class PauseMenu : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+    }
+
+    public void TogglePostProcessing()
+    {
+        if (postProcessVolume != null)
+        {
+            postProcessingOff = !postProcessingOff;
+
+            postProcessVolume.enabled = !postProcessingOff;
+
+            toggleText.text = postProcessingOff ? "Enable Post Processing" : "Disable Post Processing";
+        }
     }
 }
